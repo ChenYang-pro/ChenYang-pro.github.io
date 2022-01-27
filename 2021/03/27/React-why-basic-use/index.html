@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="ChenYang">
+    
+    <title>
+        
+            React why &amp; basic use |
+        
+        Keep Moving
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Keep Moving
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">React why &amp; basic use</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ChenYang</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-03-27 12:31:58</span>
+        <span class="mobile">2021-03-27 12:31</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/React/">React</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5870bad88718452daa39533a42e57ca0~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<blockquote>
+<p>“Learn React Once and Write Everywhere” - Reactjs.org</p>
+</blockquote>
+<h2 id="1-为什么-React"><a href="#1-为什么-React" class="headerlink" title="1. 为什么 React"></a>1. 为什么 React</h2><p>React 是 Facebook 2011 开发的，是 JavaScript MVC 框架下的应用，MVC 将应用分为三个部分：数据层，视图层和控制层。React 主要用于构建 UI，属于视图层。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5870bad88718452daa39533a42e57ca0~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<blockquote>
+<p>“Learn React Once and Write Everywhere” - Reactjs.org</p>
+</blockquote>
+<ul>
+<li>React 灵活的用于组件化开发，你可以把一个按钮 / 表单等等抽成一个组件。 React 既可以编写 Web 应用，也可以使用 React Native 开发 apps。</li>
+<li>相比于其他的框架，react 开发更简单。通过函数式编程结合 JSX 语法，可以极大减少代码量。下面对比了 Angular, Vue.js 和 React 在代码循环的写法，可以看到 react 写法更接近原生的 JS。</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93401d815e56415b944f60325ff0b4f1~tplv-k3u1fbpfcp-watermark.image" alt="Angular Loop" title="Angular Loop"><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8229741f3f734f1182997139bb82ea80~tplv-k3u1fbpfcp-watermark.image" alt="Vue.js Loop" title="Vue.js Loop"><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/63d6e47d7a314ce4bea16edabfc294e8~tplv-k3u1fbpfcp-watermark.image" alt="image.png" title="React Loop"></p>
+<ul>
+<li>React 有 Facebook 支持和广泛的社区支持</li>
+</ul>
+<p>React GitHub 已有 164K 的 star，是 GitHub Top5 的仓库。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6153ad15113f46218efa1155f70287ac~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>React 的 NPM 包每周也有数百万次下载。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e81423584d994db0be1e76c34f5c6665~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<ul>
+<li>React 性能优化。React 开发团队意识到 JS 本身很快，但是更新 DOM 会导致 JS 变慢，因此 React 使用最高效和最智能的方式优化 DOM 更改次数。主要通过虚拟 DOM 和 conCurrent mode 来实现，见 2.1 和 2.7。</li>
+</ul>
+<h3 id="1-1-MVC-amp-MVP-amp-MVVM"><a href="#1-1-MVC-amp-MVP-amp-MVVM" class="headerlink" title="1.1 MVC &amp; MVP &amp; MVVM"></a>1.1 MVC &amp; MVP &amp; MVVM</h3><p>MVC, MVP 和 MVVM 是软件架构设计模式，是解决某一类问题而抽象出来的方法。</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21d71be0be3d46faa0ae190510fa05dd~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="1-2-React-相比于原生-JS"><a href="#1-2-React-相比于原生-JS" class="headerlink" title="1.2 React 相比于原生 JS"></a>1.2 React 相比于原生 JS</h3><ul>
+<li>模块化开发</li>
+<li>不用写原生 DOM 操作，通过虚拟 DOM 优化性能</li>
+<li>UI = f(data) 函数式编程</li>
+</ul>
+<h3 id="1-3-单向数据流"><a href="#1-3-单向数据流" class="headerlink" title="1.3 单向数据流"></a>1.3 单向数据流</h3><p>自顶向下，单向数据流是 react 的特点之一，state 只能向下传递。</p>
+<h3 id="1-4-React-代数效应"><a href="#1-4-React-代数效应" class="headerlink" title="1.4 React 代数效应"></a>1.4 React 代数效应</h3><p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/169805499" >代数效应与 React - 知乎<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="2-React-使用"><a href="#2-React-使用" class="headerlink" title="2. React 使用"></a>2. React 使用</h2><h3 id="2-1-虚拟-DOM-amp-diff-amp-fiber"><a href="#2-1-虚拟-DOM-amp-diff-amp-fiber" class="headerlink" title="2.1 虚拟 DOM &amp; diff &amp; fiber"></a>2.1 虚拟 DOM &amp; diff &amp; fiber</h3><p><strong>为什么需要虚拟 DOM：</strong></p>
+<ul>
+<li>提升性能，减少重绘重排。前端性能优化的一个秘诀就是尽可能减少 DOM 操作，频繁的 DOM 操作会造成浏览器的重排和重绘。</li>
+<li>提高开发效率，无须手动操作 DOM。手动操作 DOM 无法保证程序性能，容易写出性能低的代码，省略手动 DOM 操作可以提高开发效率。</li>
+<li>实现跨平台。比如 node.js，如果想实现 SSR，借助虚拟 DOM。</li>
+<li>跨浏览器兼容。React 基于 VitrualDom 自己实现了一套自己的事件机制，自己模拟了事件冒泡和捕获的过程，采用了事件代理，批量更新等方法，抹平了各个浏览器的事件兼容性问题。</li>
+</ul>
+<p><strong>虚拟 DOM 原理：</strong></p>
+<ul>
+<li>虚拟 DOM 是真实 DOM 的映射,是一种树形结构，可以理解为真实 DOM 和 JS 之间的缓存，保存了真实 DOM 一些基本属性和关系。</li>
+<li>diffing 算法。react 会维护两颗虚拟 DOM 树，一颗保存当前状态，另外一颗渲染更新后状态，通过比较两棵树的差异，进行 DOM 修改，比较的方法就是 diffing 算法。React diffing 核心思想是增量式渲染。通过对比新的列表中的节点，在原本的列表中的位置是否是递增，来判断当前节点是否需要移动，将时间复杂度优化到 O(n)。diffing 算法通过 key 来进行比较，因此 key 需要唯一，不建议使用下标作为 key。</li>
+<li>fiber(协程)是 React16 中的新的协调引擎，目的是使得虚拟 DOM 可以增量式渲染。核心思想是，适时的让出 cpu 执行权，执行更高权限的事件，让用户不感觉卡顿。结合 concurrent mode (requestIdleCallback 和 requestAnimationFrame) 来实现 cpu 调度。<a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6943896410987659277" >走进 React Fiber 的世界<i class="fas fa-external-link-alt"></i></a></li>
+<li>React Concurrent。 并发模式，包括调度器(Scheduler), 协调器(Reconciler), 渲染器(Renderer)，通过 requestIdleCallBack(在浏览器空闲帧的时候执行), requsetAnimationFrame(在每一帧都执行)来优化 react 性能。</li>
+</ul>
+<h3 id="2-2-JSX"><a href="#2-2-JSX" class="headerlink" title="2.2 JSX"></a>2.2 JSX</h3><p>JSX 是是 JavaScript XML，React 提供的 JS 语法糖。实际上引入 React 后可以再 JS 中写 HTML。JSX 将 XML 语法加入到 JavaScript 中，在 JS 中写了 JSX 将会被预处理成 React Element</p>
+<ul>
+<li>JSX 中可以写常规 HTML，可以通过{props}往 html 中插入变量 JS 表达式，或者带参数的函数{func(props)}。</li>
+<li>JSX 编译后，是一个函数调用，返回值为 JS 对象，JSX 可以作为表达式，如 IF 判断。</li>
+<li>可以再标签中添加属性，属性若为字符串，则加上引号，若为对象或表达式，加上{}，属性 key 使用驼峰命名(JSX 中 className，没有 class)</li>
+<li>可以单闭合 <code>&lt;img/&gt;</code></li>
+<li>可以给 html 添加类但 class 需改写成 className<br><strong>为什么 React 要创建 JSX：</strong> 渲染的逻辑处理与 UI 逻辑其实是耦合的, event, state, data 互相关联，既然如此，那么就把 html 标记语言与逻辑处理相关的 js 内容放在一起，组成一个松耦合的模块，这个模块就是 JSX 元素。<br><strong>JSX 使用：</strong> 首先怎么才能写 JSX 呢，在普通的 JS 文件中需引入 react,reactDOM(若要对 DOM 进行操作)以及 babel 或者通过 Babel 在线编译<br><strong>JSX 防范 XSS 攻击：</strong> XSS 是跨站脚本注入攻击。<ul>
+<li>由于当你尝试通过{html}进行插入 html 代码时, React 会自动将 html 转为字符串,故 React 可部分防止 XSS 攻击</li>
+<li>JSX 中是通过传入函数作为事件处理方式，而不是传入字符串，字符串可能包含恶意代码</li>
+<li>JSX 无法抵御 XSS 攻击： 如：<code>&lt;a href=&quot;&#123;...&#125;&quot; /&gt;, &lt;img src=&#123;...&#125; /&gt;, &lt;iframe src=&quot;&#123;...&#125; /&gt;，css注入style=&#123;...&#125; prop，</code>，或者通过设置 a 的 href 为 javascript:xxx，以及使用 base64 编码的数据进行替换，又或从用户处接受了被恶意控制的 props。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-组件通信"><a href="#2-3-组件通信" class="headerlink" title="2.3 组件通信"></a>2.3 组件通信</h3><ul>
+<li>父子: 父组件通过 props 传递，子组件通过父组件传递回调改变自身一些状态(隐藏)。</li>
+<li>跨级: 层层传递 props(麻烦) / context(污染组件) / redux。</li>
+<li>没有关系的组件: redux / 发布订阅模式。</li>
+</ul>
+<h3 id="2-4-setState-同步-amp-异步"><a href="#2-4-setState-同步-amp-异步" class="headerlink" title="2.4 setState 同步 &amp; 异步"></a>2.4 setState 同步 &amp; 异步</h3><p>从 API 的角度来看应该是同步的，但 React 自己不保证 setState 之后能够立即拿到改变后的结果。<br>setState 在 React 能够控制的范围被调用，它就是异步的。比如合成事件处理函数, 生命周期函数, 此时会进行批量更新, 也就是将状态合并后再进行 DOM 更新。<br>如果 setState 在原生 JavaScript 控制的范围被调用，它就是同步的。比如原生事件处理函数中, 定时器回调函数中, Ajax 回调函数中, 此时 setState 被调用后会立即更新 DOM 。<br>因为异步实际上是对性能的优化。unstable_batchedUpdates 可以实现强制的批量更新。</p>
+<h3 id="2-5-生命周期"><a href="#2-5-生命周期" class="headerlink" title="2.5 生命周期"></a>2.5 生命周期</h3><ul>
+<li>componentWillMount() 渲染前调用，只触发一次</li>
+<li>componentDidMount() 渲染后调用，此时 DOM 已经生成，通过 this.getDOMNode()访问。</li>
+<li>componentWillReceiveProps 在组件接收到一个新的 prop (更新后)时被调用。</li>
+<li>shouldComponentUpdate 返回 Boolean，在组件接收到新的<code>props</code>或者<code>state</code>时被调用。</li>
+<li>componentWillUpdate 在组件接收到新的<code>props</code>或者<code>state</code>但还没有<code>render</code>时被调用。</li>
+<li>componentDidUpdate 完成更新后调用。</li>
+<li>componentWillUnMount 组件卸载时调用。</li>
+<li>getDerivedStateFromError</li>
+</ul>
+<h3 id="2-6-React-Hooks"><a href="#2-6-React-Hooks" class="headerlink" title="2.6 React Hooks"></a>2.6 React Hooks</h3><p>函数式组件，React16.8 新增特性，目的是提高组件的复用，解决类式组件组件复杂性，增加符合函数式编程中的代数效应，用于将副作用从函数中分离。</p>
+<p><strong>常用 hooks</strong></p>
+<ul>
+<li><strong>useState</strong>，返回一个数组，第一参数为 state，第二个参数为 setState。<strong>不能在 if / for 里使用，会导致 state 被覆盖。因为 React 使用链表保存 useState 值</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(initialState)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>useEffect</strong>，集合 componentDidMount，componentDidUpdate，componentWillUnMount 生命周期。接收一个数组作为依赖项，在依赖项改变时调用 fn，如果不传，则在每次 componentDidUpdate 会触发，如果传空数组，componentDidMount 触发。DOM 更新后触发</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useEffect(fn, [])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>useLayoutEffect</strong>，类似于 useEffect，同步执行，会阻塞页面渲染。</li>
+<li><strong>useContext</strong>，它是以 Hook 的方式使用 React Context。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> context = useContext(Context)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>useReducer</strong>，语法糖跟 reudx 差不多</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initialArg, init)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>useRef</strong></li>
+<li><strong>useMemo</strong>， 常用的性能优化 hook, 返回缓存变量，减少不必要渲染，类似于 shouldComponentUpdate，DOM 更新前触发。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedValue = useMemo(<span class="function">() =&gt;</span> computeExpensiveValue(a, b), [a, b]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>useCallback</strong>，常用的性能优化 hook, 返回缓存函数，减少不必要渲染，类似于 shouldComponentUpdate</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedCallback = useCallback( <span class="function">() =&gt;</span> &#123; doSomething(a, b); &#125;, [a, b], );</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>自定义 hook</strong>，通过 use 开头，有变量和 set 方法。</li>
+</ul>
+<h3 id="2-7-Redux"><a href="#2-7-Redux" class="headerlink" title="2.7 Redux"></a>2.7 Redux</h3><p>redux 是 React 的一个全局状态管理库，简化 react 中的单向数据流。</p>
+<ul>
+<li>action: JSON 对象，type 和 payload 键</li>
+<li>dispatch: 分发</li>
+<li>reducer: 纯函数，将当前 state 和 action 作为参数，返回新的 state。<br><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aa992788d1a74bc4809b1571779ddc66~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></li>
+</ul>
+<h3 id="2-7-提高性能"><a href="#2-7-提高性能" class="headerlink" title="2.7 提高性能"></a>2.7 提高性能</h3><ul>
+<li>适当使用 shouldComponentUpdate，减少组件渲染。</li>
+<li>hooks 中 useMemo，useCallBack。</li>
+<li>循环时使用唯一的 key。</li>
+<li>使用 Map 替代数组。map.get()和 map.has()比数组查找效率高。</li>
+<li>useWhyDidYouUpdate 调试组件渲染的原因</li>
+</ul>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/why-use-react-for-web-development/" >Why You Should Use React.js For Web Development<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://medium.com/@ankit.sinhal/mvc-mvp-and-mvvm-design-pattern-6e169567bbad" >MVC, MVP and MVVM Design Pattern<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6919376064833667080" >React、Vue2、Vue3 的三种 Diff 算法<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6844903975112671239" >React fiber<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6844903981999718407#%E4%BB%80%E4%B9%88%E6%98%AF-concurrent-%E6%A8%A1%E5%BC%8F" ># React Concurrent 模式抢先预览上篇: Suspense the world<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/React/">#React</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ChenYang</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
