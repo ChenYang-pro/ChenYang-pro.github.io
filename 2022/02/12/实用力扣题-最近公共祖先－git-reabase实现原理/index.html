@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="ChenYang">
+    
+    <title>
+        
+            实用力扣题: 最近公共祖先－git reabase实现原理 |
+        
+        SleepSheep | FE
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo-small.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#ff4d11","avatar":"/images/logo-small.png","favicon":"/images/logo-small.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo-small.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                SleepSheep | FE
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">实用力扣题: 最近公共祖先－git reabase实现原理</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo-small.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ChenYang</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-12 11:46:20</span>
+        <span class="mobile">2022-02-12 11:46</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>不知道有多少人和我一样，觉得刷力扣题的主要作用是为了通过笔试面试，<strong>其实很多工具都能抽象成算法</strong>。为此，我打算开一个系列用于分享实用的力扣算法，并分析算法的使用场景。<strong>这是系列的第一期：最近公共祖先(LCA，Lowest Common Ancestor)。</strong></p>
+<h4 id="🐼-先看原题"><a href="#🐼-先看原题" class="headerlink" title="🐼 先看原题"></a>🐼 先看原题</h4><p><img src=":storage%5C813b7a63-4d8a-4f0d-82e4-a8015811dfe6%5C917866f9.png" alt="leetcode236.png"></p>
+<h4 id="🦄-思路"><a href="#🦄-思路" class="headerlink" title="🦄 思路"></a>🦄 思路</h4><p>直观的想法就是用<strong>深度优先搜索</strong>，递归遍历树左子树和右子树，找到p, q对应的节点，会遇到四种情况：</p>
+<ol>
+<li>left, right都为null，即p, q不在树中，返回null（本题可以不考虑这种情况）;</li>
+<li>left为null, 返回right, right为null, 返回left;</li>
+<li>left, right都不为null, 说明p, q在根节点的两侧, 返回root;</li>
+</ol>
+<h4 id="🎠-代码"><a href="#🎠-代码" class="headerlink" title="🎠 代码"></a>🎠 代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lowestCommonAncestor = <span class="function"><span class="keyword">function</span> (<span class="params">root, p, q</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// root为null，直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (root === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// root的值等于其中一个，返回root</span></span><br><span class="line">    <span class="keyword">if</span> (root.val === p.val || root.val === q.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 递归开始</span></span><br><span class="line">    <span class="keyword">const</span> left = lowestCommonAncestor(root.left, p, q);</span><br><span class="line">    <span class="keyword">const</span> right = lowestCommonAncestor(root.right, p, q);</span><br><span class="line">    <span class="keyword">if</span> (left !== <span class="literal">null</span> &amp;&amp; right !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (left === <span class="literal">null</span> &amp;&amp; right === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left === <span class="literal">null</span> ? right : left;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="🎈-算法使用场景：-git-rebase"><a href="#🎈-算法使用场景：-git-rebase" class="headerlink" title="🎈 算法使用场景： git rebase"></a>🎈 算法使用场景： git rebase</h4><p>git常见合并分支主要是<code>merge</code>和<code>rebase</code>两种方式。两者的区别在于，<code>git merge</code>会把分支上的修改与当前的修改合并，提交一个新的合并请求，而<code>git rebase</code>是把之前分支的<code>commit</code>取消，临时保存并接在当前分支的后面。<br>举个🌰说明：<br>我们现在已有分支上新建了一个分支myJob。<br><img src=":storage%5C813b7a63-4d8a-4f0d-82e4-a8015811dfe6%5C0e99be77.png" alt="0e99be77.png"><br>我们在提交<code>commit</code>时，远程<code>origin</code>也被提交了，出现一下情况：<br><img src=":storage%5C813b7a63-4d8a-4f0d-82e4-a8015811dfe6%5C534d7283.png" alt="534d7283.png"><br>🧊 <code>git merge</code>的做法：<br><img src=":storage%5C813b7a63-4d8a-4f0d-82e4-a8015811dfe6%5C855ad4d6.png" alt="855ad4d6.png"><br>🧊 <code>git rebase</code>的做法：<br><img src=":storage%5C813b7a63-4d8a-4f0d-82e4-a8015811dfe6%5C837289c4.png" alt="837289c4.png"><br><code>git rebase</code>会少提交一个<code>commit</code>，具体原理就是，<strong>使用<code>LCA</code>找到两条分支的最新公共祖先，再从<code>origin</code>节点开始，重新提交<code>commit</code>，最后把分支完全合并。</strong></p>
+<h3 id="💡-结尾"><a href="#💡-结尾" class="headerlink" title="💡 结尾"></a>💡 结尾</h3><p>这是系列的第一篇文章，写完已是晚上10点38分，这对于我一个即将毕业的学生来说，更多的是一种满足感。今天逛知乎看到一个有趣的话题，<code>「有的人出生就在罗马，有的人出生就是牛马」英语表达 Some born Roman，some born for Roman.</code></p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/27/React-why-basic-use/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">React - why &amp; basic use</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ChenYang</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
