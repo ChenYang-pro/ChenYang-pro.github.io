@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="实用主义力扣题：LCA">
+    <meta name="description" content="实用算法题：LCA">
     <meta name="author" content="ChenYang">
     
     <title>
         
-            实用力扣题: 最近公共祖先－git reabase实现原理 |
+            实用算法题: 最近公共祖先－git reabase实现原理 |
         
         SleepSheep | FE
     </title>
@@ -48,10 +48,6 @@
 
     <div class="header-content">
         <div class="left">
-            
-                <a class="logo-image" href="/">
-                    <img src="/images/logo-small.png">
-                </a>
             
             <a class="logo-title" href="/">
                 SleepSheep | FE
@@ -122,7 +118,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">实用力扣题: 最近公共祖先－git reabase实现原理</span>
+            <span class="title-hover-animation">实用算法题: 最近公共祖先－git reabase实现原理</span>
         </div>
 
         
@@ -163,7 +159,7 @@
         
 
         <div class="article-content markdown-body">
-            <p>不知道有多少人和我一样，觉得刷力扣题的主要作用是为了通过笔试面试，<strong>其实很多工具都能抽象成算法</strong>。为此，我打算开一个系列用于分享实用的力扣算法，并分析算法的使用场景。<strong>这是系列的第一期：最近公共祖先(LCA，Lowest Common Ancestor)。</strong></p>
+            <p>今天我们来聊一个实用的话题，刷算法题到底有什么用。<span id="more"></span>不知道有多少人和曾经的我一样，觉得刷力扣题的主要作用是为了通过笔试面试，<strong>其实很多工具都能抽象成算法</strong>。为此，我打算开一个系列用于分享实用的力扣算法，并分析算法的使用场景。<strong>这是系列的第一期：最近公共祖先(LCA，Lowest Common Ancestor)。</strong></p>
 <h4 id="🐼-先看原题"><a href="#🐼-先看原题" class="headerlink" title="🐼 先看原题"></a>🐼 先看原题</h4><img src="/2022/02/12/%E5%AE%9E%E7%94%A8%E5%8A%9B%E6%89%A3%E9%A2%98-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%8Dgit-reabase%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-1/leetcode.jpg" class="" title="leetcode236">
 
 <h4 id="🦄-思路"><a href="#🦄-思路" class="headerlink" title="🦄 思路"></a>🦄 思路</h4><p>直观的想法就是用<strong>深度优先搜索</strong>，递归遍历树左子树和右子树，找到p, q对应的节点，会遇到四种情况：</p>
@@ -184,6 +180,7 @@
 <img src="/2022/02/12/%E5%AE%9E%E7%94%A8%E5%8A%9B%E6%89%A3%E9%A2%98-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%EF%BC%8Dgit-reabase%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86-1/gitrebase.jpg" class="" title="leetcode236">
 <p><code>git rebase</code>会少提交一个<code>commit</code>，具体原理就是，<strong>使用<code>LCA</code>找到两条分支的最新公共祖先，再从<code>origin</code>节点开始，重新提交<code>commit</code>，最后把分支完全合并。</strong></p>
 <h3 id="💡-结尾"><a href="#💡-结尾" class="headerlink" title="💡 结尾"></a>💡 结尾</h3><p>这是系列的第一篇文章，写完已是晚上10点38分，这对于我一个即将毕业的学生来说，更多的是一种满足感。今天逛知乎看到一个有趣的话题，<code>「有的人出生就在罗马，有的人出生就是牛马」英语表达 Some born Roman，some born for Roman.</code></p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p><a class="link"   target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9RKzBcr3I592spAsuMH45g" >用 Git 来讲讲二叉树最近公共祖先<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://www.yiibai.com/git/git_rebase.html" >git rebase命令<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
 
