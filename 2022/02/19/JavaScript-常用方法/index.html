@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="ChenYang">
+    
+    <title>
+        
+            JavaScript 常用方法 |
+        
+        SleepSheep | FE
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo-small.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#ff4d11","avatar":"/images/logo-small.png","favicon":"/images/logo-small.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                SleepSheep | FE
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">JavaScript 常用方法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo-small.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ChenYang</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-19 17:09:37</span>
+        <span class="mobile">2022-02-19 17:09</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JS/">JS</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <hr>
+<p>title: JavaScript 常用方法<br>date: 2022-02-19 17:09:37<br>tags:</p>
+<hr>
+<h3 id="🦏-前言"><a href="#🦏-前言" class="headerlink" title="🦏 前言"></a>🦏 前言</h3><p>整理<code>JavaScript</code>中常用的一些方法，方便工作中使用。<span id="more"></span></p>
+<h4 id="1-防抖-amp-节流"><a href="#1-防抖-amp-节流" class="headerlink" title="1. 防抖 &amp; 节流"></a>1. 防抖 &amp; 节流</h4><p>🪁 <strong>介绍：</strong> 防抖节流是<code>JavaScript</code>中常见的优化方式，用以减少函数触发次数。<br>🦌 <strong>区别：</strong> <strong>防抖可以理解成坐电梯</strong>，只有没人按上下行按钮（触发事件）时，电梯（函数）才会运行。 <strong>节流是指函数间隔触发</strong>。<br>🐋 <strong>使用场景：</strong> <strong>防抖常用于</strong>搜索框输入，手机号 / 邮箱检测，窗口Resize减少回流。 <strong>节流常用于</strong>滚动加载，表单提交等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 防抖: 最后执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay = <span class="number">300</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timer;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果timer存在，清除定时器</span></span><br><span class="line">    timer &amp;&amp; <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">    <span class="comment">// 重新开启定时器</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(fn, delay);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 节流: 间隔执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!flag) <span class="keyword">return</span>;</span><br><span class="line">    flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn();</span><br><span class="line">      flag = <span class="literal">true</span>;</span><br><span class="line">    &#125;, delay);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例</span></span><br><span class="line">btn.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  debounce(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&quot;click&quot;</span>), <span class="number">1000</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 1000ms内连续点击，只触发一次。</span></span><br><span class="line"></span><br><span class="line">btn.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  throttle(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&quot;click&quot;</span>), <span class="number">1000</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 3000ms内连续点击，只触发三次。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-数组去重"><a href="#2-数组去重" class="headerlink" title="2. 数组去重"></a>2. 数组去重</h4><p>🪁 <strong>介绍：</strong> 实用的方法。<br>🐋 <strong>使用场景：</strong> 对返回数组进行去重。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现方法1：使用Set的去重功能，时间复杂度O(n!)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...new <span class="built_in">Set</span>(arr)]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现方法2：使用对象缓存，时间复杂度O(n)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique_</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line">    arr.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj[item]) &#123;</span><br><span class="line">            obj[item] = <span class="literal">true</span></span><br><span class="line">            res.push(item)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-发布订阅模式"><a href="#3-发布订阅模式" class="headerlink" title="3. 发布订阅模式"></a>3. 发布订阅模式</h3><p>🪁 <strong>介绍：</strong> 发布订阅模式其实是一种对象间一对多的依赖关系，当一个对象的状态发送改变时，所有依赖于它的对象都将得到状态改变的通知。<br>🐋 <strong>使用场景：</strong> <code>addEventListener</code>，<code>VUE 中的 $on $emit</code>。<br>🦌 <strong>观察者模式和发布订阅模式区别：</strong>观察者模式中观察者指导观察目标，大多是同步的**，比如当事件触发，目标就会去调用观察者的方法。而发布-订阅模式大多数时候是异步的。只有没人按上下行按钮（触发事件）时，电梯（函数）才会运行。 <strong>发布订阅模式中，发布者和订阅者不知道对方存在，通过消息进行通行</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventEmitter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 用对象来存储回调，因为同一个事件可能有多个回调</span></span><br><span class="line">        <span class="built_in">this</span>.callBack = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 为事件名增加事件</span></span><br><span class="line">    <span class="function"><span class="title">on</span>(<span class="params">type, fn</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">this</span>.callBack[type]) <span class="built_in">this</span>.callBack[type] = [fn]</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">this</span>.callBack[type].push(fn)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">off</span>(<span class="params">type, fn</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">this</span>.callBack[type]) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">this</span>.callBack[type] = <span class="built_in">this</span>.callBack[type].filter(<span class="function"><span class="params">item</span> =&gt;</span> item !== fn)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">once</span>(<span class="params">type, fn</span>)</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn()</span><br><span class="line">            <span class="built_in">this</span>.off(type, fn)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.on(type, func)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">emit</span>(<span class="params">type, ...rest</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.callBack[type] &amp;&amp; <span class="built_in">this</span>.callBack[type].forEach(<span class="function"><span class="params">fn</span> =&gt;</span> fn.apply(<span class="built_in">this</span>, rest))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例</span></span><br><span class="line"><span class="keyword">const</span> event = <span class="keyword">new</span> EventEmitter();</span><br><span class="line"><span class="keyword">const</span> handle = <span class="function">(<span class="params">...rest</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(rest);</span><br><span class="line">&#125;;</span><br><span class="line">event.on(<span class="string">&quot;click&quot;</span>, handle);</span><br><span class="line">event.emit(<span class="string">&quot;click&quot;</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">event.off(<span class="string">&quot;click&quot;</span>, handle);</span><br><span class="line">event.emit(<span class="string">&quot;click&quot;</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">event.once(<span class="string">&quot;dbClick&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">123456</span>);</span><br><span class="line">&#125;);</span><br><span class="line">event.emit(<span class="string">&quot;dbClick&quot;</span>);</span><br><span class="line">event.emit(<span class="string">&quot;dbClick&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入结果</span></span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ]</span><br><span class="line"><span class="number">123456</span></span><br><span class="line"><span class="number">123456</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JS/">#JS</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/02/15/%E5%AE%9E%E7%94%A8%E7%AE%97%E6%B3%95%E9%A2%98-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">实用算法题: 二叉树序列化与反序列化</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ChenYang</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
