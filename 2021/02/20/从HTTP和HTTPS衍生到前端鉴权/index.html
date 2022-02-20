@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="ChenYang">
+    
+    <title>
+        
+            从HTTP和HTTPS衍生到前端鉴权 |
+        
+        SleepSheep | FE
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo-small.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#ff4d11","avatar":"/images/logo-small.png","favicon":"/images/logo-small.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                SleepSheep | FE
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">从HTTP和HTTPS衍生到前端鉴权</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/logo-small.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">ChenYang</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-02-20 12:02:03</span>
+        <span class="mobile">2021-02-20 12:02</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>整理HTTP &amp; HTTPS 以及前端一些常用知识<span id="more"></span></p>
+<h3 id="🦌-HTTP-amp-HTTPS"><a href="#🦌-HTTP-amp-HTTPS" class="headerlink" title="🦌 HTTP &amp; HTTPS"></a>🦌 HTTP &amp; HTTPS</h3><p>  <strong>HTTP</strong>：超文本传输协议，是服务器传输超文本到本地浏览器的传送协议，建立在TCP之上，负责在发送端生成请求报文，在接收端对请求内容进行处理。一般为80端口，在应用层。</p>
+<p>  <strong>HTTPS</strong>：HTTP安全版，通过SSL建立一个信息安全通道。一般为443端口。通过将数据加密发送来保证数据的可靠性。</p>
+<p><strong>HTTP header包括</strong></p>
+<ol>
+<li>基本信息</li>
+<li>Response Headers(响应头)</li>
+<li>Request Headers(请求头)</li>
+<li>Query String Params(请求参数)</li>
+</ol>
+<p><strong>HTTPS握手过程</strong></p>
+<p>  HTTPS其实是有两部分组成：HTTP + SSL / TLS，也就是在HTTP上又加了一层处理加密信息的模块。服务端和客户端的信息传输都会通过TLS进行加密，所以传输的数据都是加密后的数据。<br>  TLS 加密：对称加密(AES-128, AES-192、AES-256 和 ChaCha20)和非对称加密(DSA、RSA、ECC)<br>  SSL：安全协议<br>  对称加密算法加密数据+非对称加密算法交换密钥+数字证书验证身份=安全<br>  HTTPS(SSL握手)：总结来说，就是客户端和服务器通过SSL/TLS建立一个会话密钥进行数据的通信。<br>  具体来说：</p>
+<ol>
+<li>客户端提交HTTPS请求。(明文传输请求信息，版本信息等等。)</li>
+<li>服务器响应客户，把证书公钥发给客户端。(服务器配置好数字证书，返回协议版本，证书信息等。) CA 证书就是数字证书，是CA机构发布的。</li>
+<li>客户端验证证书公钥的有效性。(可信性，是否吊销，过期时间和域名。)</li>
+<li>有效后，生成一个会话密钥。</li>
+<li>用证书公钥加密这个会话密钥后，发送给服务器</li>
+<li>服务器收到公钥加密的会话密钥后，用私钥进行解密，返回会话密钥(非对称加密)</li>
+<li>客户端和服务器利用这个会话密钥加密传输的数据进行通信(对称加密)</li>
+</ol>
+<p><strong>HTTPS缺点：</strong></p>
+<ol>
+<li>https握手阶段比较费时</li>
+<li>缓存不如http高效</li>
+<li>SSL证书收费</li>
+</ol>
+<p><strong>HTTP版本演变</strong></p>
+<ol>
+<li>HTTP/0.9。只有GET方法，只能传输文本，没有HEADER。</li>
+<li>HTTP/1.0。加入POST、HEAD，增加响应状态码，HEADER。</li>
+<li>HTTP/1.1。增加PUT、DELETE方法，增加缓存管理和控制，允许数据分块。</li>
+<li>HTTP/2.0。二进制请求协议，多路复用(流数据交互，可以通过一个TCP连接发送多次请求)，使用头部压缩提升访问速度，可以给请求添加优先级，可以服务器主动推送。</li>
+<li>HTTP/3.0。基于QUIC协议。整合TCP协议的可靠性和UDP协议的速度和效率。通过流式数据包来实现。</li>
+</ol>
+<p>HTTP1.1 以上可以通过keep-alive实现类似websocket连接。</p>
+<p>HTTP是无状态的(指的是对交互场景没有记忆能力，每次请求都是独立的)，可以基于TCP也可以基于UDP，使用TCP可以不用考虑数据包乱序，丢失等问题，简单高效。</p>
+<p><strong>常用请求头：</strong> GET、HEAD、POST、PUT、DELETE、CONNECT、OPTIONS</p>
+<p><strong>GET和POST的区别</strong></p>
+<ol>
+<li>get参数通过url传递，post放在request body。get回退无风险,post会重复提交。</li>
+<li>get请求在url中传递的参数是有长度限制的，而post没有。</li>
+<li>get比post更不安全，因为参数直接暴露在url中，所以不能用来传递敏感信息。</li>
+<li>get请求参数会被完整保留在浏览历史记录里，而post中的参数不会被保留。</li>
+<li>GET产生一个TCP数据包；POST产生两个TCP数据包。(对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送body，服务器响应200 ok), Get没有body</li>
+<li>GET可以使用缓存，POST不能使用缓存。</li>
+<li>GET一般是没有request body</li>
+</ol>
+<p><strong>HTTP状态码</strong></p>
+<ol>
+<li>1xx：处理成功，服务器收到请求，请求者继续执行操作</li>
+<li>2xx：请求成功，操作被成功接收并处理</li>
+<li>3xx：重定向</li>
+<li>4xx: 客户端错误</li>
+<li>5xx：服务器错误</li>
+</ol>
+<p>  100： Continue    继续。客户端应继续其请求<br>  <strong>200</strong>： OK  请求成功。一般用于GET与POST请求<br>  <strong>301</strong>：    Moved Permanently    永久移动。请求的资源已被永久的移动到新URI，<br>  <strong>302</strong>：    Found    临时移动。资源只是临时被移动<br>  <strong>304</strong>：    Not Modified    未修改。如果客户端发送了一个带条件的GET 请求且该请求已被允许，而文档的内容并没有改变，则服务器应当返回这个304状态码。</p>
+<h3 id="前端跨域"><a href="#前端跨域" class="headerlink" title="前端跨域"></a>前端跨域</h3><ul>
+<li>页面a.c 访问 b.c =&gt; iframe </li>
+</ul>
+<h3 id="🐈-TCP-amp-UDP"><a href="#🐈-TCP-amp-UDP" class="headerlink" title="🐈 TCP &amp; UDP"></a>🐈 TCP &amp; UDP</h3><p>  <strong>TCP</strong>：传输控制协议，面向全连接，提供可靠的服务(三次握手、四次挥手)，1对1，首部20字节。传输层，微信文字消息。</p>
+<p>  <strong>UDP</strong>：用户数据报协议，不需要链接，不保证可靠交付，1对多，首部8字节。微信语音，视频。</p>
+<p>  <strong>TCP三次握手</strong>：客户端和服务端各自发送请求直到都可收发，因此需要三次握手(一句话)。</p>
+<p>  第一次握手：客户端发送一个TCP的SYN标志位置1的包指明客户打算连接的服务器的端口，以及初始序号X,保存在包头的序列号(Sequence Number)字段里。</p>
+<p>  第二次握手：服务器发回确认包(ACK)应答。即SYN标志位和ACK标志位均为1同时，将确认序号(Acknowledgement Number)设置为客户的I S N加1以.即X+1。</p>
+<p>  第三次握手：客户端再次发送确认包(ACK) SYN标志位为0,ACK标志位为1.并且把服务器发来ACK的序号字段+1,放在确定字段中发送给对方.并且在数据段放写ISN的+1</p>
+<p>  <strong>TCP四次挥手</strong>：客户端和服务器确认各自请求和数据都发送完后断开。</p>
+<p>  第一次挥手：<strong>客户端请求发送完毕。</strong> 当client所要发送的数据发送完毕之后，向server请求关闭连接。并且自身进入等待结束连接状态FIN_WAIT-1</p>
+<p>  第二次挥手：<strong>服务端确认是否还有数据未发送。</strong> 当server收到了来自client的FIN请求包之后，向client回复一个确认报文ACK，同时进入关闭等待状态(CLOSE -WAIT)，这时TCP连接的server便会向上层应用发送通知，表明client数据发送完毕。</p>
+<p>  第三次挥手：<strong>服务端确认没有数据发送，断开连接。</strong> TCP连接的server收到上层应用的指令表明没有数据要发送之后，会向client发送一个FIN请求数据包，其中确认位ACK=1，表明响应client的关闭连接请求。</p>
+<p>  第四次挥手：<strong>客户端断开连接。</strong> client收到了来自server的FIN数据包之后，知道server已经准备好断开连接了，于是向server发送一个确认数据包ACK，告诉server，可以关闭资源断开连接了。</p>
+<p>  <strong>TCP可靠性保证：</strong> 校验和，序列号，确认应答，超时重传，连接管理，流量控制，拥塞控制。</p>
+<p>  <strong>TCP保证传输的有序:</strong> 发送方把已经发送的数据保留在缓存区，并为每个已发送数据包启动一个定时器，若在定时器超时前收到应答信息就释放数据包占用缓冲区，否则重传数据包，直到应答或到最大次数。</p>
+<p>  <strong>拥塞控制：</strong> 网络中某一资源的需求超过了该资源所能提供的可用部分，网络的性能就要变换，叫做拥塞。当提供的负载继续增大到某一数值时，网络的吞吐量就下降到零，网络无法工作，产生所谓的死锁。</p>
+<p>  <strong>方法1 - TCP慢启动：</strong> 慢启动的总体思路就是从一个很低的初始值开始，逐渐增加数据发送的速度，直到达到超时或者丢包为止。<br>  <strong>方法2 - 快重传：</strong> 当接收方收到了一个失序的报文，马上报告给发送方，我没收到，赶紧重传。<br>  <strong>方法3 - 快恢复：</strong> 当发送方连续收到三个重复确认，执行乘法减小，ssthresh减半，然后执行拥塞避免算法，线性增大cwnd。</p>
+<p>  <strong>TCP一次最大能传输数据量：</strong> TCP是基于流式数据传输，可以设置最大的传输大小(MTU，MTU包括TCP首部20字节 / UDP首部8字节，IP首部20字节和payload等等)，在TCP三次握手时，会在SYN报文中使用MSS(最大分片长度)来指定TCP每次传输的数据段长度，</p>
+<h3 id="🦄-OSI-七层模型"><a href="#🦄-OSI-七层模型" class="headerlink" title="🦄 OSI 七层模型"></a>🦄 OSI 七层模型</h3><p>  OSI（Open System Interconnect），即开放式系统互联。 一般都叫OSI参考模型，是ISO（国际标准化组织）组织在1985年研究的网络互联模型。<a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6844903505111547918" >OSI 七层模型<i class="fas fa-external-link-alt"></i></a></p>
+<p>  从上往下依次是：</p>
+<ol>
+<li>应用层。为应用程序提供服务并规定应用程序中通讯相关的细节，也就是为应用提供服务。常见的协议有 HTTP，FTP，TELNET，SMTP，websocket 等。</li>
+<li>表示层。表示层的作用是将应用处理的信息转换为适合网络传输的格式，或者将来自下一层的数据转换为上层能处理的格式。它主要负责数据格式的转换。常见的协议有 ASCII、SSL/TLS 等。</li>
+<li>会话层。会话层作用是负责建立和断开通信连接（数据流动的逻辑通路），以及数据的分割等数据传输相关的管理。常见的协议有 ADSP、RPC 等。</li>
+<li>传输层。传输层起着可靠传输的作用。只在通信双方节点进行处理，而不需在路由器上处理。此层有两个具有代表性的协议： TCP 与 UDP。</li>
+<li>网络层。网络层负责将数据传输到目标地址。目标地址可以使多个网络通过路由器连接而成的某一个地址。因此这一层主要负责寻址和路由选择。主要由 IP、ICMP 两个协议组成。</li>
+<li>数据链路层。该层负责物理层面上互连的节点之间的通信传输。例如与1个以太网相连的两个节点间的通讯。常见的协议有 HDLC、PPP、SLIP 等。</li>
+<li>物理层。物理层负责0、1比特流（0、1序列）与电压高低、光的闪灭之间的互换。典型的协议有 RS 232C、RS 449/422/423、V.24 和 X.21、X.21bis 等。</li>
+</ol>
+<h3 id="🐆-WebSocket"><a href="#🐆-WebSocket" class="headerlink" title="🐆 WebSocket"></a>🐆 WebSocket</h3><p>  WebSocket是HTML5中的协议，支持持久连续。Http1.0和HTTP1.1都不支持持久性的链接，HTTP1.1中的keep-alive，将多个http请求合并为1个。目标是在一个单独的持久连接上提供全双工、双向通信，基于TCP，依赖于HTTP。</p>
+<p><strong>Http如何转化为WebSocket:</strong><br>每个WebSocket连接都始于一个HTTP请求。具体来说，WebSocket协议在第一次握手连接时，通过HTTP协议在传送WebSocket支持的版本号，协议的字版本号，原始地址，主机地址等等一些列字段给服务器端：<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /chat HTTP/<span class="number">1.1</span></span><br><span class="line"><span class="attr">Host</span>: server.example.com</span><br><span class="line"><span class="attr">Upgrade</span>: websocket</span><br><span class="line"><span class="attr">Connection</span>: Upgrade</span><br><span class="line">Sec-WebSocket-Key:dGhlIHNhbXBsZSBub25jZQ==</span><br><span class="line">Origin: http:<span class="comment">//example.com</span></span><br><span class="line">Sec-WebSocket-Version: <span class="number">13</span></span><br></pre></td></tr></table></figure><br>Upgrade: websocket，Connection: Upgrade将HTTP升级成WebSocket</p>
+<p><strong>WebSocket为什么要基于HTTP:</strong><br>第一，WebSocket设计上就是天生为HTTP增强通信（全双工通信等），所以在HTTP协议连接的基础上是很自然的一件事，并因此而能获得HTTP的诸多便利。第二，这诸多便利中有一条很重要，基于HTTP连接将获得最大的一个兼容支持，比如即使服务器不支持WebSocket也能建立HTTP通信，只不过返回的是onerror而已，这显然比服务器无响应要好的多。</p>
+<p><strong>Websocket重连机制：</strong><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/5297732db7f2" >websocket重连机制实现 - 简书<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>兼容性问题：</strong><br>Internet Explorer 10<br>Firefox 6<br>Chrome 14<br>Safari 6.0<br>Opera 12.1<br>iOS Safari 6.0<br>Chrome for Android 27.0<br>对于旧的浏览器：SockJS</p>
+<h3 id="🦓-缓存"><a href="#🦓-缓存" class="headerlink" title="🦓 缓存"></a>🦓 缓存</h3><p>  前端缓存可以分为 HTTP缓存和浏览器缓存。</p>
+<p>  HTTP缓存：一般只对GET请求进行缓存。http缓存都是从第二次请求开始的。第一次请求资源时，服务器返回资源，并在respone header头中回传资源的缓存参数；第二次请求时，浏览器判断这些请求参数，命中强缓存就直接200，否则就把请求参数加到request header头中传给服务器，看是否命中协商缓存，命中则返回304，否则服务器会返回新的资源。缓存一般是运维人员/后端设置。</p>
+<ol>
+<li>强缓存。生效后不用向服务器发送请求，返回200。强缓存有关的Header头属性有Pragma(优先级高，HTTP1.0)/Cache-Control(优先级中，HTTP1.1)/Expires(优先级低HTTP1.0)。缓存在内存或硬盘视浏览器缓存策略而定。<br>Cache-Control: private(客户端可以缓存)，public(客户端和代理服务器均可缓存)，max-age(缓存的资源将在 xxx 秒后过期)，no-cache(不缓存过期资源，缓存会向服务器确认)，no-store(不缓存)。</li>
+</ol>
+<p>  在Chrome中，强缓存包括 从内存中获取(高频) 和从磁盘中获取(低频)。</p>
+<ol start="2">
+<li>协商缓存。生效后向服务器发送请求，返回304。服务器返回的响应头中没有Cache-Control和Expires或者Cache-Control和Expires过期还或者它的属性设置为no-cache时(即不走强缓存)，那么浏览器第二次请求时就会与服务器进行协商，与服务器端对比判断资源是否进行了修改更新。协商缓存相关的header头属性有(ETag/If-Not-Match(HTTP1.1)、Last-Modified/If-Modified-Since)。</li>
+</ol>
+<p>  Etag和Last-Modified区别：Etag是对资源的唯一标识，Last-Modified是该资源文件最后一次更改时间。Etag记录哈希值，Last-Modified的时间单位是秒，服务器优先考虑Etag。</p>
+<p>  不使用缓存：</p>
+<ol>
+<li>Ctrl + F5强制刷新</li>
+<li>按F5刷新或浏览器的刷新按钮，默认加上Cache-Control：max-age=0，即会走协商缓存。</li>
+<li>浏览器设置不缓存。</li>
+</ol>
+<p>  浏览器缓存：</p>
+<p>  共同点：同源，都是保存在浏览器端。</p>
+<ol>
+<li>Cookie: cookie数据始终在同源的http请求中携带，即cookie在浏览器和服务器间来回传递，存用户唯一的sessionId。容量小，只有4k左右。保存用户登录状态一般存在cookie中，可以设置过期时间(maxAge)。通过domain将cookie设置在父级域名上即可实现cookie跨域。 secures=true: 只能用https发送cookie。 httpOnly=true: 不能通过js获取，document.cookie无法打印。</li>
+<li>sessionStorage: H5新特性，本地存储，不和后台交互，关闭浏览器或页面后消失。</li>
+<li>localStorage: H5新特性，同源窗口都会共享，并且不会失效，不管窗口或者浏览器关闭与否都会始终生效。<br>API：</li>
+</ol>
+<ul>
+<li>xx.setItem(key,value) 保存数据</li>
+<li>xx.getItem(key,value) 读取数据</li>
+<li>xx.removeItem(key) 删除单个数据</li>
+<li>xx.clear() 删除所有数据</li>
+<li>xx.key(index) 得到某个索引的key</li>
+</ul>
+<h3 id="🐅-AJAX原理"><a href="#🐅-AJAX原理" class="headerlink" title="🐅 AJAX原理"></a>🐅 AJAX原理</h3><p>ajax的工作原理就是通过XmlHttpRequest对象来向服务器发出异步请求，从服务器中获得数据，然后用Javascript来操作DOM从而更新局部页面 Ajax是一种无需重新加载整个网页，能够更新部分网页的技术。</p>
+<h3 id="🐏-Fetch原理"><a href="#🐏-Fetch原理" class="headerlink" title="🐏 Fetch原理"></a>🐏 Fetch原理</h3><p>Fetch 等同于 XMLHttpRequest。它提供了许多与 XMLHttpRequest 相同的功能，但被设计成更具可扩展性和高效性。</p>
+<p>Fetch 的核心在于对 HTTP 接口的抽象，包括 Request、Response、Headers 和 Body，以及用于初始化异步请求的 global fetch。得益于 JavaScript 实现的这些抽象好的 HTTP 模块，其他接口能够很方便的使用这些功能。它是基于 Promise 的。</p>
+<p>Ajax 是一种代表异步 JavaScript + XML 的模型（技术合集），所以 Fetch 也是 Ajax 的一个子集<br><img src=":storage%5Cbb1ed175-a0bd-4686-9c3d-d2731ecb56fb%5Cdb2d5260.png" alt="db2d5260.png"></p>
+<h3 id="🦒-浏览器攻击"><a href="#🦒-浏览器攻击" class="headerlink" title="🦒 浏览器攻击"></a>🦒 浏览器攻击</h3><p><strong>CSRF (Cross-site request forgery) 跨站请求伪造。利用浏览器对页面的信任。</strong></p>
+<p>  CSRF攻击流程：</p>
+<ol>
+<li>用户打开浏览器，访问网站A，输入用户名和密码请求登录网站A</li>
+<li>用户信息验证通过后，网站A产生Cookie返回给浏览器，此时拥堵登录网站成功，可以发送请求到网站A</li>
+<li>用户未退出网站A，在同一浏览器中，打开一个新的tab访问网站B</li>
+<li>网站B收到用户请求后，返回一些攻击性代码，在用户不知情的时候携带Cookie，向网站A发出请求。</li>
+<li>网站A根据cookie，以为是用户发送的请求，返回请求响应内容，导致用户个人信息、财产损失。</li>
+</ol>
+<p>  防御CSRF攻击：</p>
+<ul>
+<li>验证 HTTP Referer字段：验证请求头的Referer判断来源站点</li>
+<li>验证Token：Token不会在访问时，自动带上。</li>
+</ul>
+<p><strong>XSS (Cross Site Scripting) 跨站脚本攻击，脚本注入获取cookie，token。利用用户对当前页面信任</strong><br>  XSS攻击分类：</p>
+<ul>
+<li>存储型XSS攻击：将恶意代码提交存储在服务器端，当目标用户访问该页面获取数据时，恶意代码会从服务器返回到浏览器做正常的HTML和JS解析执行，这样XSS攻击就发生了。</li>
+<li>反射型XSS攻击：攻击者通过特定手法(如电子邮件)，诱使用户去访问一个包含恶意代码的，当用户点击后，恶意代码会直接在用户的浏览器执行。</li>
+<li>DOM型攻击：恶意脚本修改页面的 DOM 结构，是纯粹发生在客户端的攻击。</li>
+</ul>
+<p>  防御XSS攻击：</p>
+<ul>
+<li>针对存储型XSS攻击，对输入内容的特定字符进行编码。例如对表示 html标记的 &lt; &gt; 等符号进行编码</li>
+<li>针对反射型XSS攻击，在 cookie中设置 httpOnly：可以防止客户端通过document.cookie读取 cookie，此 HTTP头由服务端设置。</li>
+<li>针对反射型XSS攻击，在输出 URL参数之前，要先对URL进行 URLEncode操作</li>
+<li>开启白名单，阻止白名单以外的资源的加载和运行</li>
+<li>后端接口也需要对关键字符进行过滤。</li>
+</ul>
+<p>  <strong>Token 为什么比 Cookie 安全</strong></p>
+<ul>
+<li>Cookie</li>
+</ul>
+<p>  Cookie是登陆后，后端生成一个sessionid放在cookie中返回给客户端，并且服务端一直记录着这个sessionid，客户端以后每次请求都会自动带上这个sessionid，服务端通过这个sessionid来验证身份之类的操作。所以别人拿到了cookie等于拿到了sessionid，就可以完全替代你。</p>
+<p>  Cookie属性：Name/Value, Expires(过期时间), Domain, Path, Secure, HTTPOnly(避免XSS攻击), <strong>SameSite(Cookie 在跨站请求时不会被发送，从而可以阻止跨站请求伪造攻击，属性值 Strict:要求当前网页和目标完全一致 / Lax: 部分请求携带Cookie / None: 默认，都携带Cookie)</strong></p>
+<ul>
+<li>Token</li>
+</ul>
+<p>  登陆后，后端会返回一个token给客户端，客户端将这个token存储起来，然后每次客户端请求都需要开发者手动将token放在header中带过去，服务端每次只需要对这个token进行验证就能使用token中的信息来进行下一步操作了。</p>
+<ul>
+<li>对于XSS来说，Token和Cookie都可以被拿到，是没有区别的。但是对于CSRF来说，被攻击时Cookie会自动带上，从而能对用户进行攻击，而Token不行。</li>
+</ul>
+<h3 id="🐑-输入URL到页面呈现的过程"><a href="#🐑-输入URL到页面呈现的过程" class="headerlink" title="🐑 输入URL到页面呈现的过程"></a>🐑 输入URL到页面呈现的过程</h3><p>  <strong>1 .DNS解析</strong>：根据url找到服务器的ip(CDN)，先从缓存中寻找(浏览器缓存-&gt;系统缓存-&gt;路由器缓存)，没有则查询DNS服务器；<br>  <strong>2. TCP连接</strong>：通过TCP将请求的信息，说明，数据打包。<br>  <strong>3. 发送HTTP/HTTPS请求</strong>：浏览器根据这个ip以及相应的端口，构造一个HTTP请求。<br>  <strong>4. 服务器处理请求返回HTML</strong>：服务器解析请求做出相应，返回相应html给浏览器。<br>  <strong>5. 浏览器渲染页面</strong>：浏览器根据返回的HTML和CSS构建DOM树和CSSOM树，合并为渲染树。之后进行页面局部，解析DOM。同时根据缓存信息确认加载的内容<br>  <strong>6. 连接结束</strong></p>
+<h3 id="🦏-前后端鉴权方式"><a href="#🦏-前后端鉴权方式" class="headerlink" title="🦏 前后端鉴权方式"></a>🦏 前后端鉴权方式</h3><p>基石：Cookie</p>
+<pre><code>HTTP是无状态的协议(对于事务处理没有记忆能力，每次客户端和服务端会话完成时，服务端不会保存任何会话信息)，两次请求无法分辨是否来自同一个人，此时需要主动的维护一个状态，用于告知服务器两次请求是否来自同一浏览器，即Cookie或者Session。
+
+Cookie的流程：
+1. 服务器返回HTTP返回头的Set-Cookie字段，保存Cookie。
+2. 浏览器发送请求时，会自动把Cookie通过HTTP请求头的Cookie字段，带给接口。
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name=value</td>
+<td>键值对，设置 Cookie 的名称及相对应的值，都必须是字符串类型。如果值为 Unicode 字符，需要为字符编码。如果值为二进制数据，则需要使用 BASE64 编码。</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>指定 cookie 所属域名，默认是当前域名</td>
+</tr>
+<tr>
+<td>path</td>
+<td>指定 cookie 在哪个路径（路由）下生效，默认是 ‘/‘。如果设置为 /abc，则只有 /abc 下的路由可以访问到该 cookie，如：/abc/read。</td>
+</tr>
+<tr>
+<td>maxAge</td>
+<td>cookie 失效的时间，单位秒。 比expires好用。</td>
+</tr>
+<tr>
+<td>expires</td>
+<td>过期时间，在设置的某个时间点后该 cookie 就会失效。一般浏览器的 cookie 都是默认储存的，当关闭浏览器结束这个会话的时候，这个 cookie 也就会被删除</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>该 cookie 是否仅被使用安全协议传输。安全协议有 HTTPS，SSL等，在网络上传输数据之前先将数据加密。默认为false。当 secure 值为 true 时，cookie 在 HTTP 中是无效，在 HTTPS 中才有效。</td>
+</tr>
+<tr>
+<td>httpOnly</td>
+<td>如果给某个 cookie 设置了 httpOnly 属性，则无法通过 JS 脚本 读取到该 cookie 的信息，但还是能通过 Application 中手动修改 cookie，所以只是在一定程度上可以防止 XSS 攻击，不是绝对的安全</td>
+</tr>
+<tr>
+<td><strong>Cookie需要考虑的问题：</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+<ol>
+<li>使用 httpOnly 在一定程度上提高安全性</li>
+<li>尽量减少 cookie 的体积，能存储的数据量不能超过 4kb</li>
+<li>cookie 无法跨域</li>
+<li>移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token</li>
+<li>不要存储敏感数据，比如用户密码，账户余额</li>
+</ol>
+<p><strong>Session</strong> </p>
+<p>  Session认证时存储在服务器端的，基于Cookie实现的，sessionId会作为标识符存在Cookie中。</p>
+<p>  Session认证流程：</p>
+<ol>
+<li>用户第一次请求服务器时，服务器根据用户提交的相关信息，创建对应的Session，生成一个sessionId并返回。</li>
+<li>浏览器接收到服务器返回的SessionId后，把它存在Cookie上，同时记录所属的域名。</li>
+<li>用户第二次访问服务器的时间，请求会判断当前域名下是否存在Cookie，如果存在则自动将Cookie发送给服务器端。 </li>
+<li>服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 Session 证明用户已经登录可执行后面操作。</li>
+</ol>
+<p>  <strong>Session需要考虑的问题：</strong></p>
+<ol>
+<li>需要在服务端定期的去清理过期的 session 减少占用的内存空间。</li>
+<li>服务器端使用分布式的时候，需要考虑Session跨域的问题。</li>
+<li>移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token。</li>
+<li>当遇到浏览器不支持Cookie或者禁止Cookie时，就需要把sessinId放在url后面的参数上。</li>
+</ol>
+<p><strong>Token</strong></p>
+<ul>
+<li>Acesss Token<br>访问资源接口(API)时所需要的资源凭证。简单的token由 uid + time + signature组成。一种服务端无状态的认证方式，服务端不用存放 token 数据。用解析 token 的计算时间换取 session 的存储空间，从而减轻服务器的压力，减少频繁的查询数据库。</li>
+</ul>
+<p>  <strong>Token 认证流程：</strong></p>
+<ol>
+<li>客户端发送登录请求，服务端验证用户名和密码。</li>
+<li>验证成功后，服务段会签发一个token，返回给客户端。</li>
+<li>客户端收到token后，将其存在cookie或localStorage中。</li>
+<li>客户端每次发送请求时，都需要带上token。</li>
+<li>服务器收到请求后，验证token的有效性。</li>
+</ol>
+<ul>
+<li>Refresh Token<br>refresh token 是专用于刷新 access token 的 token。如果没有 refresh token，也可以刷新 access token，但每次刷新都要用户输入登录用户名与密码，会很麻烦。有了 refresh token，可以减少这个麻烦，客户端直接用 refresh token 去更新 access token，无需用户进行额外的操作。 </li>
+<li><strong>Token存储位置</strong>：<ol>
+<li>localStorage。优点：没有时间限制的存储，会一直存放在浏览器中。缺点：由于LocalStorage 可以被 javascript 访问，所以容易受到XSS攻击。</li>
+<li>cookie。优点：可以防止 csrf攻击，因为 csrf只能在请求中携带 cookie，而这里必须从 cookie中拿出相应的值并放到 authorization 头中。实际上cookie不能跨站(同源策略)被取出，因此可以避免 csrf 攻击。</li>
+</ol>
+</li>
+<li><strong>为什么使用JWT</strong>：JWT是session认证的替代。Session认证存在的问题：1)Session信息存储在服务器，如果登录的用户过多，会占用过多的服务器空间； 2) Session依赖于Cookie，容易被截获，造成CSRF(跨站请求伪造攻击)；3)Session认证不适合分布式站点的应用场景。</li>
+</ul>
+<p><strong>JWT</strong></p>
+<p>  JWT (JSON WEB TOKEN)，是目前最流行的跨域认证解决方案。用于用户登录信息的确认，就是在你登陆的时候生成一串加密字符串token，在每次请求的时候都带上这串token。</p>
+<p>   <strong>JWT认证流程</strong>： 用户登录时，服务器会签发一个JWT TOKEN字符串，并返回给客户端，客户端保存JWT TOKEN。之后客户端在请求服务器时，如果需要进行用户的认证，则将JWT TOKEN通过请求头传递给服务器，服务器验证 TOKEN的有效性。 本质上，服务器端保存的是SECRET私钥，而客户端保存是服务器加密后的JWT TOKEN。</p>
+<p>   <strong>JWT校验过程</strong>：uid+time+sign[+固定参数] 客户端发起请求时，传递给服务器一个JWT TOKEN，分为三个部分(头部header、载荷payload和签证signature)，服务器收到TOKEN后，将TOKEN的header和payload使用header中的加密算法和服务器本身的私钥进生成组合加密，生成signature与传递来的signature进行比对，一致则说明TOKEN合法，否则TOKEN为伪造的。 JWT 是相对安全的 (header和payload是base64对称加密，signature则是密钥加密的)。</p>
+<p>   <strong>由于header和payload是base64对称加密，不建议在TOKEN中放敏感信息。</strong></p>
+<p>  <strong>JWT和Token的区别：</strong> JWT可以保存用户信息和加密数据，减少对于数据库的查询。</p>
+<p><strong>单点登录</strong> </p>
+<p>  当业务拓展后，就会有更多业务系统分散到不同域名下，就需要「一次登录，全线通用」的能力，叫做「单点登录」。</p>
+<ul>
+<li>虚假的单点登录。如果业务系统都在同一主域名下，比如wenku.baidu.com tieba.baidu.com，就好办了。可以直接把 cookie domain 设置为主域名 baidu.com，百度也就是这么干的。</li>
+<li>真实的单点登录(主域名不同)。比如同时拥有didichuxing.com xiaojukeji.com didiglobal.com等域名，种 cookie 是完全绕不开的。</li>
+</ul>
+<p><strong>SSO 认证流程:</strong><br>    1. 在 SSO 域下，SSO 不是通过接口把 ticket 直接返回，而是通过一个带 code 的 URL 重定向到系统 A 的接口上，这个接口通常在 A 向 SSO 注册时约定<br>    2. 浏览器被重定向到 A 域下，带着 code 访问了 A 的 callback 接口，callback 接口通过 code 换取 ticket<br>    3. 这个 code 不同于 ticket，code 是一次性的，暴露在 URL 中，只为了传一下换 ticket，换完就失效<br>    4. callback 接口拿到 ticket 后，在自己的域下 set cookie 成功<br>    5. 在后续请求中，只需要把 cookie 中的 ticket 解析出来，去 SSO 验证就好<br>    6. 访问 B 系统也是一样</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/03/27/React-why-basic-use/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">React - why &amp; basic use</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">ChenYang</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
